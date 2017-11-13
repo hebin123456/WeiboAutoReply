@@ -1,3 +1,6 @@
+# 微博秒评器
+由 https://github.com/huiyadanli/WeiboMonitor 项目的源码改版而来，原版权归源码所有，附加代码版权归本人所有
+
 # 微博秒赞器
 微博自动点赞，监控微博页面，新发微博秒赞。
 
@@ -30,3 +33,4 @@
 
 ## License
 WTFPL
+HEBIN
