@@ -4,6 +4,9 @@
 ## 界面
 ![界面](https://raw.githubusercontent.com/hebin123456/WeiboAutoReply/master/image/screenshot1.png)
 
+## 版本更新
+* 修复某些dom页面解析时的问题
+
 # 微博秒赞器
 微博自动点赞，监控微博页面，新发微博秒赞。
 

@@ -34,8 +34,8 @@ namespace WeiboMonitor
         {
             this.wbLogin = wbLogin;
             this.uid = uid;
-
             string html = wbLogin.Get("http://weibo.com/u/" + uid + "?is_all=1");
+
             oldPage = new WeiboPage(html);
         }
     }

@@ -86,6 +86,7 @@ namespace WeiboMonitor
             SetEnabled(txtUID, s);
             SetEnabled(txtInterval, s);
             SetEnabled(txtRestTime, s);
+            SetEnabled(txtContent, s);
             SetEnabled(btnStart, s);
         }
 
@@ -121,7 +122,7 @@ namespace WeiboMonitor
             {
                 result = ex.Message;
             }
-
+            
             // 对登陆结果进行判断并处理
             if (result == "0")
             {

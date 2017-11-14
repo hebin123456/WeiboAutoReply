@@ -1,5 +1,6 @@
 ﻿using HtmlAgilityPack;
 using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.Text.RegularExpressions;
 
@@ -112,6 +113,8 @@ namespace WeiboMonitor
             uid = UseRegex(@"(?<=CONFIG\['uid'\]=').*?(?=';)");
             nick = UseRegex(@"(?<=CONFIG\['nick'\]=').*?(?=';)");
             location = UseRegex(@"(?<=CONFIG\['location'\]=').*?(?=';)");
+
+            //System.Windows.Forms.MessageBox.Show(oid+onick);
         }
 
         /// <summary>
@@ -174,21 +177,53 @@ namespace WeiboMonitor
             //while (true);
 
             List<WeiboFeed> wbFeedList = new List<WeiboFeed>();
+
+            //System.IO.StreamWriter sr = new System.IO.StreamWriter("123.html");
+            //sr.Write(topNode.InnerHtml);
+            //sr.Close();
+
             foreach (HtmlNode feedListItem in topNode.ChildNodes)
             {
                 if (feedListItem.Attributes.Contains("action-type") && feedListItem.Attributes["action-type"].Value == "feed_list_item")
                 {
                     string mid = feedListItem.Attributes["mid"].Value;
-                    string username = feedListItem.SelectSingleNode("div[1]/div[@class='WB_detail']/div[1]/a[1]").InnerHtml;
-                    string time = feedListItem.SelectSingleNode("div[1]/div[@class='WB_detail']/div[2]/a[1]").Attributes["title"].Value;
-                    string content = feedListItem.SelectSingleNode("div[1]/div[@class='WB_detail']/div[3]").InnerHtml;
-                    string likeStatus = feedListItem.SelectSingleNode("div[@class='WB_feed_handle']/div/ul/li[4]/a/span/span/span").Attributes["class"].Value;
+                    string username;
+                    string time;
+                    string content;
+                    string date;
+                    try
+                    {
+                        username = feedListItem.SelectSingleNode("div[1]/div[@class='WB_detail']/div[1]/a[1]").InnerHtml;
+                        date = feedListItem.SelectSingleNode("div[1]/div[@class='WB_detail']/div[2]/a[1]").Attributes["date"].Value;
+                        content = feedListItem.SelectSingleNode("div[1]/div[@class='WB_detail']/div[3]").InnerHtml;
+                    }
+                    //存在某些dom结点不规范
+                    catch
+                    {
+                        username = "";
+                        string datepattern = "date=\"\\d+\"";
+                        Regex regex = new Regex(datepattern);
+                        date = regex.Match(feedListItem.InnerHtml).ToString();
+                        date = date.Substring(6, date.Length - 7);
+                        content = "";
+                    }
+                    long unixDate;
+                    DateTime start;
+                    DateTime end;
+                    unixDate = long.Parse(date);
+                    start = new DateTime(1970, 1, 1, 0, 0, 0, DateTimeKind.Utc);
+                    end = start.AddMilliseconds(unixDate).ToLocalTime();
+
+                    //获取时间
+                    time = end.ToString();
+
+                    string likeStatus = "";
 
                     bool isLike = false;
-                    
+
                     //System.Windows.Forms.MessageBox.Show("mid:" + mid + ", username:" + username + ", time:" + time + ", content:" + content + ", likeStatus:" + likeStatus);
 
-                    if (likeStatus.IndexOf("UI")>0)
+                    if (likeStatus.IndexOf("UI") > 0)
                     {
                         isLike = true;
                     }
@@ -197,41 +232,40 @@ namespace WeiboMonitor
                     wbFeedList.Add(wbFeedTmp);
                 }
             }
-
             return wbFeedList;
         }
 
-        /// <summary>
-        /// 比较输入的List（较旧），输出新增的WeiboFeed
-        /// </summary>
-        /// <param name="oldFeedList">旧的List</param>
-        /// <returns></returns>
-        public List<WeiboFeed> Compare(List<WeiboFeed> oldFeedList)
-        {
-            // 自身没有抓取到微博时直接返回null
-            if (wbFeedList == null || wbFeedList.Count == 0)
-            {
-                return null;
-            }
+/// <summary>
+/// 比较输入的List（较旧），输出新增的WeiboFeed
+/// </summary>
+/// <param name="oldFeedList">旧的List</param>
+/// <returns></returns>
+public List<WeiboFeed> Compare(List<WeiboFeed> oldFeedList)
+{
+// 自身没有抓取到微博时直接返回null
+if (wbFeedList == null || wbFeedList.Count == 0)
+{
+return null;
+}
 
-            List<WeiboFeed> newWbFeedList = new List<WeiboFeed>();
-            foreach (WeiboFeed newFeed in wbFeedList)
-            {
-                bool isNewly = true;
-                foreach (WeiboFeed oldFeed in oldFeedList)
-                {
-                    if (oldFeed.Time >= newFeed.Time)
-                    {
-                        isNewly = false;
-                        break;
-                    }
-                }
-                if (isNewly)
-                {
-                    newWbFeedList.Add(newFeed);
-                }
-            }
-            return newWbFeedList;
-        }
-    }
+List<WeiboFeed> newWbFeedList = new List<WeiboFeed>();
+foreach (WeiboFeed newFeed in wbFeedList)
+{
+bool isNewly = true;
+foreach (WeiboFeed oldFeed in oldFeedList)
+{
+if (oldFeed.Time >= newFeed.Time)
+{
+    isNewly = false;
+    break;
+}
+}
+if (isNewly)
+{
+newWbFeedList.Add(newFeed);
+}
+}
+return newWbFeedList;
+}
+}
 }
