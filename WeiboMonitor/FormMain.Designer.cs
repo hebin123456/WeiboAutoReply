@@ -51,6 +51,7 @@
             this.btnStop = new System.Windows.Forms.Button();
             this.txtContent = new System.Windows.Forms.TextBox();
             this.label6 = new System.Windows.Forms.Label();
+            this.forward = new System.Windows.Forms.CheckBox();
             this.contextMenuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -230,12 +231,23 @@
             this.label6.TabIndex = 18;
             this.label6.Text = "回复内容：";
             // 
+            // forward
+            // 
+            this.forward.AutoSize = true;
+            this.forward.Location = new System.Drawing.Point(268, 98);
+            this.forward.Name = "forward";
+            this.forward.Size = new System.Drawing.Size(84, 16);
+            this.forward.TabIndex = 19;
+            this.forward.Text = "回复并转发";
+            this.forward.UseVisualStyleBackColor = true;
+            // 
             // FormMain
             // 
             this.AcceptButton = this.btnStart;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(529, 441);
+            this.Controls.Add(this.forward);
             this.Controls.Add(this.label6);
             this.Controls.Add(this.txtContent);
             this.Controls.Add(this.btnStop);
@@ -289,6 +301,7 @@
         private System.Windows.Forms.Button btnStop;
         private System.Windows.Forms.TextBox txtContent;
         private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.CheckBox forward;
     }
 }
 

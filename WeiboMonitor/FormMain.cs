@@ -22,6 +22,7 @@ namespace WeiboMonitor
             rtbOutput.Text = "该项目专为自动评论而设计，源代码由GitHub上的一个微博自动点赞项目改编而来" + Environment.NewLine
                 + "原点赞项目地址：https://github.com/huiyadanli/WeiboMonitor" + Environment.NewLine
                 + "新评论项目地址：https://github.com/hebin123456/WeiboAutoReply" + Environment.NewLine
+                + "新增转发功能，UID请自行获取" + Environment.NewLine
                 + "新代码同源代码一样遵循开源协议" + Environment.NewLine
                 + "刷新时间间隔不宜太小，否则可能会出现账号异常的情况" + Environment.NewLine;
             // 读取设置
@@ -180,7 +181,7 @@ namespace WeiboMonitor
                     {
                         //newWbFeedList[i].Like(wbLogin, true);
                         //MessageBox.Show(wbLogin.Uid);
-                        newWbFeedList[i].Comment(wbLogin, txtContent.Text, wbLogin.Uid);
+                        newWbFeedList[i].Comment(wbLogin, txtContent.Text, wbLogin.Uid, forward.Checked);
                     }
                     t.OldPage = newPage;
 

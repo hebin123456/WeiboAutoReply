@@ -113,7 +113,7 @@ namespace WeiboMonitor
         {
             return HttpUtility.UrlEncode(s);
         }
-        public int Comment(WeiboLogin wbLogin, string comment, string Uid)
+        public int Comment(WeiboLogin wbLogin, string comment, string Uid, bool forward)
         {
             try
             {
@@ -126,7 +126,7 @@ namespace WeiboMonitor
                 //这个是点赞的提交字符串
                 //string postStr = "location=" + WBPage.Location + "&version=mini&qid=heart&mid=" + ID + "&loc=profile&cuslike=1&_t=0";
                 //这个是评论的提交字符串,转发把forward改成1
-                string postStr = "act=post&mid=" + ID + "&uid=" + Uid + "&forward=0&isroot=0&content=" + urlencode(comment) + "&location=" + WBPage.Location + "&module=scommlist&group_source=&pdetail=1005056399610336&_t=0";
+                string postStr = "act=post&mid=" + ID + "&uid=" + Uid + "&forward=" + (forward? 1 : 0) + "&isroot=0&content=" + urlencode(comment) + "&location=" + WBPage.Location + "&module=scommlist&group_source=&pdetail=1005056399610336&_t=0";
                 string responseStr = HttpHelper.Post(url, WBPage.Url, wbLogin.MyCookies, postStr);
 
                 //System.Windows.Forms.MessageBox.Show(url);
