@@ -112,11 +112,11 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(203, 17);
+            this.label3.Location = new System.Drawing.Point(185, 18);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(59, 12);
+            this.label3.Size = new System.Drawing.Size(77, 24);
             this.label3.TabIndex = 9;
-            this.label3.Text = "页面UID：";
+            this.label3.Text = "  页面UID：\r\n（自行获取）";
             // 
             // txtInterval
             // 
@@ -150,7 +150,7 @@
             // 
             this.notifyIcon1.ContextMenuStrip = this.contextMenuStrip1;
             this.notifyIcon1.Icon = ((System.Drawing.Icon)(resources.GetObject("notifyIcon1.Icon")));
-            this.notifyIcon1.Text = "新发微博秒赞器";
+            this.notifyIcon1.Text = "微博秒评论";
             this.notifyIcon1.Visible = true;
             this.notifyIcon1.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.notifyIcon1_MouseDoubleClick);
             // 

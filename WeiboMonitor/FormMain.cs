@@ -19,7 +19,10 @@ namespace WeiboMonitor
         public FormMain()
         {
             InitializeComponent();
-            rtbOutput.Text = "该项目专为自动评论而设计，源代码由GitHub上的一个点赞项目改编而来，原项目地址：https://github.com/huiyadanli/WeiboMonitor" + Environment.NewLine
+            rtbOutput.Text = "该项目专为自动评论而设计，源代码由GitHub上的一个微博自动点赞项目改编而来" + Environment.NewLine
+                + "原点赞项目地址：https://github.com/huiyadanli/WeiboMonitor" + Environment.NewLine
+                + "新评论项目地址：https://github.com/hebin123456/WeiboAutoReply" + Environment.NewLine
+                + "新代码同源代码一样遵循开源协议" + Environment.NewLine
                 + "刷新时间间隔不宜太小，否则可能会出现账号异常的情况" + Environment.NewLine;
             // 读取设置
             txtUsername.Text = Properties.Settings.Default.Username;
