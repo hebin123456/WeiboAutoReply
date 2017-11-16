@@ -12,9 +12,15 @@
       <Value Profile="(Default)">20</Value>
     </Setting>
     <Setting Name="RestTime" Type="System.String" Scope="User">
-      <Value Profile="(Default)">2~6</Value>
+      <Value Profile="(Default)">1~7</Value>
     </Setting>
     <Setting Name="PageUID" Type="System.String" Scope="User">
+      <Value Profile="(Default)" />
+    </Setting>
+    <Setting Name="Content" Type="System.String" Scope="User">
+      <Value Profile="(Default)" />
+    </Setting>
+    <Setting Name="Search" Type="System.String" Scope="User">
       <Value Profile="(Default)" />
     </Setting>
   </Settings>

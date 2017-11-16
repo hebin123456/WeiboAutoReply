@@ -32,6 +32,7 @@ namespace WeiboMonitor
             txtInterval.Text = Properties.Settings.Default.Interval;
             txtRestTime.Text = Properties.Settings.Default.RestTime;
             txtContent.Text = Properties.Settings.Default.Content;
+            txtSearch.Text = Properties.Settings.Default.Search;
             txtUID.Text = Properties.Settings.Default.PageUID;
         }
 
@@ -42,6 +43,7 @@ namespace WeiboMonitor
             Properties.Settings.Default.Password = txtPassword.Text;
             Properties.Settings.Default.Interval = txtInterval.Text;
             Properties.Settings.Default.RestTime = txtRestTime.Text;
+            Properties.Settings.Default.Search = txtSearch.Text;
             Properties.Settings.Default.PageUID = txtUID.Text;
             Properties.Settings.Default.Content = txtContent.Text;
             Properties.Settings.Default.Save();
@@ -321,6 +323,11 @@ namespace WeiboMonitor
 
         private void btnSearch_Click(object sender, EventArgs e)
         {
+            if(txtSearch.Text == "")
+            {
+                MessageBox.Show("不能搜索空字符串！");
+                return ;
+            }
             WeiboSearch ws = new WeiboSearch(txtSearch.Text);
             if(ws.Oid == "")
             {
