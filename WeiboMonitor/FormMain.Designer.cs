@@ -52,6 +52,9 @@
             this.txtContent = new System.Windows.Forms.TextBox();
             this.label6 = new System.Windows.Forms.Label();
             this.forward = new System.Windows.Forms.CheckBox();
+            this.txtSearch = new System.Windows.Forms.TextBox();
+            this.label7 = new System.Windows.Forms.Label();
+            this.btnSearch = new System.Windows.Forms.Button();
             this.contextMenuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -104,20 +107,20 @@
             // 
             // txtUID
             // 
-            this.txtUID.Location = new System.Drawing.Point(268, 12);
+            this.txtUID.Location = new System.Drawing.Point(271, 41);
             this.txtUID.Multiline = true;
             this.txtUID.Name = "txtUID";
-            this.txtUID.Size = new System.Drawing.Size(250, 45);
+            this.txtUID.Size = new System.Drawing.Size(148, 21);
             this.txtUID.TabIndex = 8;
             // 
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(185, 18);
+            this.label3.Location = new System.Drawing.Point(212, 45);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(77, 24);
+            this.label3.Size = new System.Drawing.Size(35, 12);
             this.label3.TabIndex = 9;
-            this.label3.Text = "  页面UID：\r\n（自行获取）";
+            this.label3.Text = "UID：\r\n";
             // 
             // txtInterval
             // 
@@ -241,12 +244,41 @@
             this.forward.Text = "回复并转发";
             this.forward.UseVisualStyleBackColor = true;
             // 
+            // txtSearch
+            // 
+            this.txtSearch.Location = new System.Drawing.Point(271, 14);
+            this.txtSearch.Name = "txtSearch";
+            this.txtSearch.Size = new System.Drawing.Size(148, 21);
+            this.txtSearch.TabIndex = 20;
+            // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Location = new System.Drawing.Point(212, 18);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(53, 12);
+            this.label7.TabIndex = 21;
+            this.label7.Text = "微博名：";
+            // 
+            // btnSearch
+            // 
+            this.btnSearch.Location = new System.Drawing.Point(442, 12);
+            this.btnSearch.Name = "btnSearch";
+            this.btnSearch.Size = new System.Drawing.Size(75, 23);
+            this.btnSearch.TabIndex = 22;
+            this.btnSearch.Text = "搜索";
+            this.btnSearch.UseVisualStyleBackColor = true;
+            this.btnSearch.Click += new System.EventHandler(this.btnSearch_Click);
+            // 
             // FormMain
             // 
             this.AcceptButton = this.btnStart;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(529, 441);
+            this.Controls.Add(this.btnSearch);
+            this.Controls.Add(this.label7);
+            this.Controls.Add(this.txtSearch);
             this.Controls.Add(this.forward);
             this.Controls.Add(this.label6);
             this.Controls.Add(this.txtContent);
@@ -302,6 +334,9 @@
         private System.Windows.Forms.TextBox txtContent;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.CheckBox forward;
+        private System.Windows.Forms.TextBox txtSearch;
+        private System.Windows.Forms.Label label7;
+        private System.Windows.Forms.Button btnSearch;
     }
 }
 

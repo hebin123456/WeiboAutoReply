@@ -33,7 +33,7 @@ namespace WeiboMonitor
         /// </summary>
         public string Url
         {
-            get { return "http://weibo.com/u/" + Oid; }
+            get { return "http://weibo.com/" + Oid; }
         }
 
         /// <summary>

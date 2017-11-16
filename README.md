@@ -5,7 +5,11 @@
 ![界面](https://raw.githubusercontent.com/hebin123456/WeiboAutoReply/master/image/screenshot1.png)
 
 ## 版本更新
+* 2017-11-15
 * 修复某些dom页面解析时的问题
+
+* 2017-11-16
+* 新增按微博名字自动搜索微博ID/个性域名，但是不要过于依赖这个功能，比如杨幂的搜索出来就是不准的，今天有点懒惰，就不修复这个Bug了
 
 # 微博秒赞器
 微博自动点赞，监控微博页面，新发微博秒赞。

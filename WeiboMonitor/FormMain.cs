@@ -24,7 +24,8 @@ namespace WeiboMonitor
                 + "新评论项目地址：https://github.com/hebin123456/WeiboAutoReply" + Environment.NewLine
                 + "新增转发功能，UID请自行获取" + Environment.NewLine
                 + "新代码同源代码一样遵循开源协议" + Environment.NewLine
-                + "刷新时间间隔不宜太小，否则可能会出现账号异常的情况" + Environment.NewLine;
+                + "刷新时间间隔不宜太小，否则可能会出现账号异常的情况" + Environment.NewLine
+                + "登录前记得在手机端关闭登录保护，否则可能出现无法正常登录的情况" + Environment.NewLine;
             // 读取设置
             txtUsername.Text = Properties.Settings.Default.Username;
             txtPassword.Text = Properties.Settings.Default.Password;
@@ -87,7 +88,9 @@ namespace WeiboMonitor
             SetEnabled(txtInterval, s);
             SetEnabled(txtRestTime, s);
             SetEnabled(txtContent, s);
+            SetEnabled(txtSearch, s);
             SetEnabled(btnStart, s);
+            SetEnabled(btnSearch, s);
         }
 
         private void bgwLogin_DoWork(object sender, DoWorkEventArgs e)
@@ -173,7 +176,7 @@ namespace WeiboMonitor
                 }
 
                 MonitorTimer t = (MonitorTimer)sender;
-                string html = wbLogin.Get("http://weibo.com/u/" + t.Uid + "?is_all=1");
+                string html = wbLogin.Get("https://weibo.com/" + t.Uid + "?is_all=1");
                 WeiboPage newPage = new WeiboPage(html);
                 List<WeiboFeed> newWbFeedList = newPage.Compare(t.OldPage.WbFeedList);
                 if (newWbFeedList != null)
@@ -316,6 +319,14 @@ namespace WeiboMonitor
             this.Focus();
         }
 
-
+        private void btnSearch_Click(object sender, EventArgs e)
+        {
+            WeiboSearch ws = new WeiboSearch(txtSearch.Text);
+            if(ws.Oid == "")
+            {
+                MessageBox.Show("获取失败，请手动获取！\r\n注意：这个抓取程序不一定能保证抓取到的ID是正确的ID！");
+            }
+            txtUID.Text = ws.Oid;
+        }
     }
 }
