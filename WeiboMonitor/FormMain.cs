@@ -1,8 +1,11 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
@@ -34,6 +37,9 @@ namespace WeiboMonitor
             txtContent.Text = Properties.Settings.Default.Content;
             txtSearch.Text = Properties.Settings.Default.Search;
             txtUID.Text = Properties.Settings.Default.PageUID;
+
+            // 加载表情
+            Load_Emoji();
         }
 
         private void btnStart_Click(object sender, EventArgs e)
@@ -48,7 +54,7 @@ namespace WeiboMonitor
             Properties.Settings.Default.Content = txtContent.Text;
             Properties.Settings.Default.Save();
 
-            if (txtUsername.Text.Trim() != "" && txtPassword.Text.Trim() != "" && txtUID.Text.Trim() != "" && txtInterval.Text.Trim() != "" && GetRestTime())
+            if (txtUsername.Text.Trim() != "" && txtPassword.Text.Trim() != "" && txtUID.Text.Trim() != "" && txtInterval.Text.Trim() != "" && txtContent.Text.Trim() != "" && GetRestTime())
             {
                 bgwLogin.RunWorkerAsync();
             }
@@ -334,6 +340,48 @@ namespace WeiboMonitor
                 MessageBox.Show("获取失败，请手动获取！\r\n注意：这个抓取程序不一定能保证抓取到的ID是正确的ID！");
             }
             txtUID.Text = ws.Oid;
+        }
+
+        // 添加表情
+        private void Load_Emoji()
+        {
+            StreamReader sr = new StreamReader("emoji/emoji.json");
+            string jsonStr = sr.ReadToEnd();
+            sr.Close();
+            JArray jtab = (JArray)JsonConvert.DeserializeObject(jsonStr);
+            for(int i = 0; i < jtab.Count; i++)
+            {
+                string name = jtab[i]["name"].ToString();
+                string path = jtab[i]["path"].ToString();
+                TabPage tabPage = new TabPage(name);
+                tb_emoji.Controls.Add(tabPage);
+                JArray jpic = (JArray)jtab[i]["pic"];
+                FlowLayoutPanel panel = new FlowLayoutPanel();
+                panel.Size = new Size(336, 196);
+                for (int j = 0; j < jpic.Count; j++)
+                {
+                    JObject jObject = (JObject)jpic[j];
+                    foreach (KeyValuePair<string, JToken> item in jObject)
+                    {
+                        string key = item.Key;
+                        string value = item.Value.ToString();
+                        //MessageBox.Show(key + "," + value);
+                        PictureBox pic = new PictureBox();
+                        pic.Size = new Size(22, 22);
+                        pic.Name = key;
+                        pic.Image = new Bitmap("emoji/" + path + "/" + value);
+                        pic.Click += pictureBox_Add;
+                        panel.Controls.Add(pic);
+                    }
+                }
+                tabPage.Controls.Add(panel);
+            }
+        }
+        
+        // 绑定表情添加事件
+        private void pictureBox_Add(object sender, EventArgs e)
+        {
+            txtContent.Text += "[" + ((PictureBox)sender).Name + "]";
         }
     }
 }

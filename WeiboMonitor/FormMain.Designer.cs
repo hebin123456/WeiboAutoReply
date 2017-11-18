@@ -55,6 +55,8 @@
             this.txtSearch = new System.Windows.Forms.TextBox();
             this.label7 = new System.Windows.Forms.Label();
             this.btnSearch = new System.Windows.Forms.Button();
+            this.label8 = new System.Windows.Forms.Label();
+            this.tb_emoji = new System.Windows.Forms.TabControl();
             this.contextMenuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -141,10 +143,10 @@
             // 
             // rtbOutput
             // 
-            this.rtbOutput.Location = new System.Drawing.Point(11, 242);
+            this.rtbOutput.Location = new System.Drawing.Point(14, 445);
             this.rtbOutput.Name = "rtbOutput";
             this.rtbOutput.ReadOnly = true;
-            this.rtbOutput.Size = new System.Drawing.Size(506, 190);
+            this.rtbOutput.Size = new System.Drawing.Size(503, 190);
             this.rtbOutput.TabIndex = 12;
             this.rtbOutput.Text = "";
             this.rtbOutput.LinkClicked += new System.Windows.Forms.LinkClickedEventHandler(this.rtbOutput_LinkClicked);
@@ -222,7 +224,7 @@
             this.txtContent.Location = new System.Drawing.Point(83, 132);
             this.txtContent.Multiline = true;
             this.txtContent.Name = "txtContent";
-            this.txtContent.Size = new System.Drawing.Size(434, 100);
+            this.txtContent.Size = new System.Drawing.Size(434, 79);
             this.txtContent.TabIndex = 17;
             // 
             // label6
@@ -270,12 +272,31 @@
             this.btnSearch.UseVisualStyleBackColor = true;
             this.btnSearch.Click += new System.EventHandler(this.btnSearch_Click);
             // 
+            // label8
+            // 
+            this.label8.AutoSize = true;
+            this.label8.Location = new System.Drawing.Point(12, 217);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(41, 12);
+            this.label8.TabIndex = 23;
+            this.label8.Text = "表情：";
+            // 
+            // tb_emoji
+            // 
+            this.tb_emoji.Location = new System.Drawing.Point(83, 217);
+            this.tb_emoji.Name = "tb_emoji";
+            this.tb_emoji.SelectedIndex = 0;
+            this.tb_emoji.Size = new System.Drawing.Size(344, 222);
+            this.tb_emoji.TabIndex = 24;
+            // 
             // FormMain
             // 
             this.AcceptButton = this.btnStart;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(529, 441);
+            this.ClientSize = new System.Drawing.Size(529, 645);
+            this.Controls.Add(this.tb_emoji);
+            this.Controls.Add(this.label8);
             this.Controls.Add(this.btnSearch);
             this.Controls.Add(this.label7);
             this.Controls.Add(this.txtSearch);
@@ -337,6 +358,8 @@
         private System.Windows.Forms.TextBox txtSearch;
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.Button btnSearch;
+        private System.Windows.Forms.Label label8;
+        private System.Windows.Forms.TabControl tb_emoji;
     }
 }
 

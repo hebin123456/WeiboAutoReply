@@ -2,14 +2,17 @@
 由 https://github.com/huiyadanli/WeiboMonitor 项目的源码改版而来，原版权归源码所有，附加代码版权归本人所有，新版本遵循原版本的开源协议
 
 ## 界面
-![界面](https://raw.githubusercontent.com/hebin123456/WeiboAutoReply/master/image/screenshot1.png)
+![界面](https://raw.githubusercontent.com/hebin123456/WeiboAutoReply/master/image/screenshot2.png)
 
 ## 版本更新
 * 2017-11-15
 * 修复某些dom页面解析时的问题
 
 * 2017-11-16
-* 新增按微博名字自动搜索微博ID/个性域名，但是不要过于依赖这个功能，存在不准确性
+* 新增按微博名字自动搜索微博ID/个性域名，如果搜索不准确，可以使用网页自行获取
+
+* 2017-11-18
+* 新增表情回复，让你的回复更精彩
 
 # 微博秒赞器
 微博自动点赞，监控微博页面，新发微博秒赞。
