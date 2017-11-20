@@ -17,7 +17,8 @@ namespace WeiboMonitor
         private WeiboLogin wbLogin;
         private bool isLogin = false;
         private MonitorTimer mTimer;
-        private int[] restTime = new int[2];
+        // 24小时
+        private bool[] restTime = new bool[24];
 
         public FormMain()
         {
@@ -60,7 +61,30 @@ namespace WeiboMonitor
             }
             else
             {
-                MessageBox.Show("请填写完正确的信息再登录！", "提示");
+                if(txtUsername.Text.Trim() == "")
+                {
+                    MessageBox.Show("请填写完正确的账号再登录！", "提示");
+                }
+                else if (txtPassword.Text.Trim() == "")
+                {
+                    MessageBox.Show("请填写完正确的密码再登录！", "提示");
+                }
+                else if (txtUID.Text.Trim() == "")
+                {
+                    MessageBox.Show("请填写完正确的UID再登录！", "提示");
+                }
+                else if (txtInterval.Text.Trim() == "")
+                {
+                    MessageBox.Show("请填写完正确的刷新间隔再登录！", "提示");
+                }
+                else if (txtContent.Text.Trim() == "")
+                {
+                    MessageBox.Show("请填写完正确的回复内容再登录！", "提示");
+                }
+                else if (!GetRestTime())
+                {
+                    MessageBox.Show("请填写完正确的休息时间(格式：多个a(或a-b)，用英文逗号断开，例如1,2-3)再登录！", "提示");
+                }
             }
         }
 
@@ -77,9 +101,26 @@ namespace WeiboMonitor
         {
             try
             {
-                string[] t = txtRestTime.Text.Split('~');
-                restTime[0] = Convert.ToInt32(t[0]);
-                restTime[1] = Convert.ToInt32(t[1]);
+                restTime = new bool[24];
+                string[] t = txtRestTime.Text.Split(',');
+                for(int i = 0; i < t.Length; i++)
+                {
+                    if(t[i].IndexOf("-") >= 0)
+                    {
+                        string[] strs = t[i].Split('-');
+                        int a = Convert.ToInt32(strs[0]);
+                        int b = Convert.ToInt32(strs[1]);
+                        for(int j = a; j <= b; j++)
+                        {
+                            restTime[j % 24] = true;
+                        }
+                    }
+                    else
+                    {
+                        int c = Convert.ToInt32(t[i % 24]);
+                        restTime[c] = true;
+                    }
+                }
                 return true;
             }
             catch
@@ -178,8 +219,9 @@ namespace WeiboMonitor
         {
             lock (this)
             {
-                if (DateTime.Now.Hour >= restTime[0] && DateTime.Now.Hour <= restTime[1])
+                if (restTime[DateTime.Now.Hour])
                 {
+                    AppendText(rtbOutput, "现在处于休息时间" + Environment.NewLine);
                     return;
                 }
 

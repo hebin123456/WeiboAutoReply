@@ -61,7 +61,7 @@ namespace WeiboMonitor.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("1~7")]
+        [global::System.Configuration.DefaultSettingValueAttribute("2-6")]
         public string RestTime {
             get {
                 return ((string)(this["RestTime"]));

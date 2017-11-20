@@ -207,7 +207,7 @@
             this.txtRestTime.Name = "txtRestTime";
             this.txtRestTime.Size = new System.Drawing.Size(97, 21);
             this.txtRestTime.TabIndex = 15;
-            this.txtRestTime.Text = "2~6";
+            this.txtRestTime.Text = "2-6";
             // 
             // btnStop
             // 
